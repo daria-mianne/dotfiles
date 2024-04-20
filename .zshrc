@@ -112,10 +112,6 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-export PATH=$PATH:~/bin
-export PATH=$PATH:~/.local/share/ffxiv-tools
-export PATH=$PATH:~/code/hudkit
-
 # General shell shortcuts
 alias pws='pwd; ls'
 alias pwl='pwd; l'
