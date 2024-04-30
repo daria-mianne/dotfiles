@@ -198,3 +198,34 @@ function gbdesc() {
 alias gbs='git bisect start'
 alias good='git bisect good'
 alias bad='git bisect bad'
+
+# Enable nvm to load volta configs (credit for this section belongs to André Rieussec)
+autoload -U add-zsh-hook
+load-nvmrc() {
+  local node_version="$(nvm version)"
+  local nvmrc_path="$(nvm_find_nvmrc)"
+
+  if [ -n "$nvmrc_path" ]; then
+    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+
+    if [ "$nvmrc_node_version" = "N/A" ]; then
+      nvm install
+    elif [ "$nvmrc_node_version" != "$node_version" ]; then
+      nvm use
+    fi
+  elif [ -f ./package.json ]; then
+    local pkg_node_version=$(jq -r .volta.node package.json)
+    local inst_node_version=$(nvm version "$pkg_node_version")
+
+    if [ "$inst_node_version" = "N/A" ]; then
+      nvm install $pkg_node_version
+    elif [ "$inst_node_version" != "$node_version" ]; then
+      nvm use $inst_node_version
+    fi
+  elif [ "$node_version" != "$(nvm version default)" ]; then
+    echo "Reverting to nvm default version"
+    nvm use default
+  fi
+}
+add-zsh-hook chpwd load-nvmrc
+load-nvmrc
