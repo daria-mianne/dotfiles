@@ -186,6 +186,7 @@ alias glog='git log --pretty=oneline'
 alias gst='git status'
 alias gdif='git diff'
 alias gsdif='git diff --shortstat'
+alias gndif='git diff --name-only'
 function gbdesc() {
   if [[ $# = 0 ]]
   then
