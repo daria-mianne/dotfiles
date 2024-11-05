@@ -1,0 +1,5 @@
+if [ -f ~/dotfiles/.zshrc ]; then
+        source ~/dotfiles/.zshrc
+else
+        echo "Error: dotfiles repo missing or zshrc missing from that repo"
+fi

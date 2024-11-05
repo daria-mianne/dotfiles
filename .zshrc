@@ -200,3 +200,6 @@ alias gbs='git bisect start'
 alias good='git bisect good'
 alias bad='git bisect bad'
 
+if [ -f /proc/sys/fs/binfmt_misc/WSLInterop ]; then
+  source ~/dotfiles/.zshrc_wsl
+fi
