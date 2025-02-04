@@ -1,5 +1,7 @@
 if [ ! -d ~/.oh-my-zsh ]; then
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    # Above command overwrites zshrc, so re-overwrite
+    cp ~/dotfiles/.copy_to_home_zshrc ~/.zshrc
 fi
 
 if ! lsd_loc="$(type -p "lsd")" || [[ -z $lsd_loc ]]; then
