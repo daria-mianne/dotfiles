@@ -1,9 +1,11 @@
+# ensure ohmyzsh
 if [ ! -d ~/.oh-my-zsh ]; then
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
     # Above command overwrites zshrc, so re-overwrite
     cp ~/dotfiles/.copy_to_home_zshrc ~/.zshrc
 fi
 
+# ensure lsd
 if ! lsd_loc="$(type -p "lsd")" || [[ -z $lsd_loc ]]; then
     if ! cargo_loc="$(type -p "cargo")" || [[ -z $cargo_loc ]]; then
         apt install cargo
@@ -11,6 +13,17 @@ if ! lsd_loc="$(type -p "lsd")" || [[ -z $lsd_loc ]]; then
     cargo install lsd
 fi
 export PATH=$PATH:~/.cargo/bin
+
+# ensure fonts
+if ! -d ~/.local/share/fonts/NerdFonts; then
+    git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git ~/git/nerd-fonts
+    $(cd ~/git/nerd-fonts && ./install.sh)
+fi
+
+# ensure pl10k
+if ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"; then
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
+fi
 
 # To import this file in your actual .zshrc file, copy and uncomment the below, fixing the path referenced:
 # if [ -f /path/to/dotfiles/.zshrc ]; then
@@ -29,7 +42,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+ZSH_THEME="powerlevel10k"
 RPROMPT='[%D{%L:%M:%S %p}]'
 TMOUT=1
 TRAPALRM() {
@@ -218,10 +231,3 @@ if [ -f /proc/sys/fs/binfmt_misc/WSLInterop ]; then
   source ~/dotfiles/.zshrc_wsl
 fi
 
-if ! -d ~/.local/share/fonts/NerdFonts; then
-    echo "You don't seem to have the necessary font(s) from nerdfont!"
-    echo "    Run the following commands to get them:"
-    echo "        mkdir -p ~/git"
-    echo "        git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git ~/git/nerd-fonts"
-    echo "        ~/nerd-fonts/install.sh"
-fi
