@@ -217,3 +217,11 @@ alias bad='git bisect bad'
 if [ -f /proc/sys/fs/binfmt_misc/WSLInterop ]; then
   source ~/dotfiles/.zshrc_wsl
 fi
+
+if ! -d ~/.local/share/fonts/NerdFonts; then
+    echo "You don't seem to have the necessary font(s) from nerdfont!"
+    echo "    Run the following commands to get them:"
+    echo "        mkdir -p ~/git"
+    echo "        git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git ~/git/nerd-fonts"
+    echo "        ~/nerd-fonts/install.sh"
+fi
