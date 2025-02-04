@@ -1,3 +1,15 @@
+if [ ! -d ~/.oh-my-zsh ]; then
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+fi
+
+if ! lsd_loc="$(type -p "lsd")" || [[ -z $lsd_loc ]]; then
+    if ! cargo_loc="$(type -p "cargo")" || [[ -z $cargo_loc ]]; then
+        apt install cargo
+    fi
+    cargo install lsd
+fi
+export PATH=$PATH:~/.cargo/bin
+
 # To import this file in your actual .zshrc file, copy and uncomment the below, fixing the path referenced:
 # if [ -f /path/to/dotfiles/.zshrc ]; then
 #     source /path/to/dotfiles/.zshrc
