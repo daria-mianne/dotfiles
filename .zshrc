@@ -2,9 +2,10 @@
 
 # ohmyzsh
 if [ ! -d ~/.oh-my-zsh ]; then
+    cp ~/.zshrc .zshrc.bak
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
     # Above command overwrites zshrc, so re-overwrite
-    cp ~/dotfiles/.copy_to_home_zshrc ~/.zshrc
+    mv .zshrc.bak ~/.zshrc
 fi
 export ZSH="$HOME/.oh-my-zsh"
 
