@@ -5,20 +5,20 @@ if [ ! -d ~/.oh-my-zsh ]; then
     cp ~/dotfiles/.copy_to_home_zshrc ~/.zshrc
 fi
 
-# ensure lsd
-if ! lsd_loc="$(type -p "lsd")" || [[ -z $lsd_loc ]]; then
-    if ! cargo_loc="$(type -p "cargo")" || [[ -z $cargo_loc ]]; then
-        apt install cargo
-    fi
-    cargo install lsd
-fi
-export PATH=$PATH:~/.cargo/bin
-
 # ensure fonts
 if [ ! -d ~/.local/share/fonts/NerdFonts ]; then
     git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git ~/git/nerd-fonts
     $(cd ~/git/nerd-fonts && ./install.sh)
 fi
+
+# ensure lsd
+if ! lsd_loc="$(type -p "lsd")" || [[ -z $lsd_loc ]]; then
+    if ! cargo_loc="$(type -p "cargo")" || [[ -z $cargo_loc ]]; then
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+    fi
+    cargo install lsd
+fi
+export PATH=$PATH:~/.cargo/bin
 
 # ensure pl10k
 if [ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k" ]; then
@@ -187,7 +187,7 @@ function cwl() {
 alias gad='git add'
 alias grm='git rm'
 alias gcom='git commit -m'
-alias gca='git add . && git commit -m'
+alias gca='git commit -am'
 alias gcoma='git commit --amend'
 alias grb='git rebase'
 alias gir='git rebase -i'
