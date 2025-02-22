@@ -37,6 +37,11 @@ if ! cargo_loc="$(type -p "cargo")" || [[ -z $cargo_loc ]]; then
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 fi
 
+# mdcat
+if ! mdcat_loc="$(type -p "mdcat")" || [[ -z $mdcat_loc ]]; then
+    cargo install mdcat
+fi
+
 # lsd
 if ! lsd_loc="$(type -p "lsd")" || [[ -z $lsd_loc ]]; then
     cargo install lsd
@@ -52,6 +57,19 @@ fi
 if ! jj_loc="$(type -p "jj")" || [[ -z $jj_loc ]]; then
     sudo apt install libssl-dev openssl pkg-config build-essential
     cargo install --locked --bin jj jj-cli
+fi
+
+# nvm
+if ! typeset -f nvm > /dev/null; then
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+    export NVM_DIR="~/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+fi
+
+# node
+if ! npm_loc="$(type -p "npm")" || [[ -z $npm_loc ]]; then
+    nvm install node
 fi
 
 # General shell shortcuts
