@@ -116,17 +116,23 @@ function cwl() {
     pwl
 }
 
-# jj shortcuts
+# jj configuration
+jj config set --user user.name "Daria Anderson"
+jj config set --user user.email "dariaander@icloud.com"
 jj config set --user revset-aliases."'closest_bookmark(to)'" "'heads(::to & bookmarks())'"
 jj config set --user aliases.pull '["bookmark", "move", "--from", "closest_bookmark(@-)", "--to", "@-"]'
+jj config set --user git.auto-local-bookmark true
+
+# jj shortcuts
 alias jn='jj new'
 alias jd='jj describe'
+alias je='jj edit'
 alias jb='jj bookmark'
 alias jbs='jb set'
 alias jbt='jb track'
 alias jl='jj log -r ..'
 alias jpush="jbs -r 'closest_bookmark(@-)'; jj git push"
-alias jpull='jj pull'
+alias jpull='jj git fetch; jj pull'
 alias jst='jj st'
 alias jsp='jj split'
 alias jdif='jj diff'
