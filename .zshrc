@@ -62,9 +62,9 @@ fi
 # nvm
 if ! typeset -f nvm > /dev/null; then
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
-    export NVM_DIR="~/.nvm"
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 fi
 
 # node
@@ -116,7 +116,18 @@ function cwl() {
     pwl
 }
 
-# Git shortcuts
+# jj shortcuts
+alias jn='jj new'
+alias jd='jj describe'
+alias jb='jj bookmark'
+alias jbs='jb set'
+alias jbt='jb track'
+alias jl='jj log -r ..'
+alias jp='jj git push'
+alias jst='jj st'
+alias jsp='jj split'
+
+# git shortcuts
 alias gad='git add'
 alias grm='git rm'
 alias gcom='git commit -m'
