@@ -116,26 +116,36 @@ function cwl() {
     pwl
 }
 
-# jj configuration
-jj config set --user user.name "Daria Anderson"
-jj config set --user user.email "dariaander@icloud.com"
-jj config set --user revset-aliases."'closest_bookmark(to)'" "'heads(::to & bookmarks())'"
-jj config set --user aliases.pull '["bookmark", "move", "--from", "closest_bookmark(@-)", "--to", "@-"]'
-jj config set --user git.auto-local-bookmark true
+# remove bad oh-my-zsh aliases
+unalias gl
 
 # jj shortcuts
+alias jgi='jj git init --colocate'
 alias jn='jj new'
 alias jd='jj describe'
+alias jdm='jj describe -m'
 alias je='jj edit'
 alias jb='jj bookmark'
 alias jbs='jb set'
+alias jbm='jb move'
 alias jbt='jb track'
 alias jl='jj log -r ..'
-alias jpush="jbs -r 'closest_bookmark(@-)'; jj git push"
+alias jpush="jbm --from 'closest_bookmark(@-)' --to @ && jj git push"
 alias jpull='jj git fetch; jj pull'
 alias jst='jj st'
 alias jsp='jj split'
 alias jdif='jj diff'
+alias jconfu='jj config set --user'
+alias jconfr='jj config set --repo'
+alias jrb='jj rebase'
+
+# jj configuration
+jconfu user.name "Daria Anderson"
+jconfu user.email "dariaander@icloud.com"
+jconfu revset-aliases."'closest_bookmark(to)'" "'heads(::to & bookmarks())'"
+jconfu aliases.pull '["bookmark", "move", "--from", "closest_bookmark(@-)", "--to", "@-"]'
+jconfu git.auto-local-bookmark true
+jconfu revsets.log "'all()'"
 
 # git shortcuts
 alias gad='git add'
