@@ -117,15 +117,19 @@ function cwl() {
 }
 
 # jj shortcuts
+jj config set --user revset-aliases."'closest_bookmark(to)'" "'heads(::to & bookmarks())'"
+jj config set --user aliases.pull '["bookmark", "move", "--from", "closest_bookmark(@-)", "--to", "@-"]'
 alias jn='jj new'
 alias jd='jj describe'
 alias jb='jj bookmark'
 alias jbs='jb set'
 alias jbt='jb track'
 alias jl='jj log -r ..'
-alias jp='jj git push'
+alias jpush="jbs -r 'closest_bookmark(@-)'; jj git push"
+alias jpull='jj pull'
 alias jst='jj st'
 alias jsp='jj split'
+alias jdif='jj diff'
 
 # git shortcuts
 alias gad='git add'
@@ -144,11 +148,11 @@ function gmer() {
         git merge --no-ff -m "Merge branch \"$1\" into \"$(git rev-parse --abbrev-ref HEAD)\"" $1
     fi
 }
-alias push='git push'
-alias pushf='git push --force-with-lease'
-alias pull='git pull'
+alias gpush='git push'
+alias gpushf='git push --force-with-lease'
+alias gpull='git pull'
 alias pa='git pull --all'
-alias fetch='git fetch'
+alias gf='git fetch'
 alias stash='git stash'
 alias spop='git stash pop'
 alias gchk='git checkout'
