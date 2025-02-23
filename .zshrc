@@ -131,6 +131,7 @@ alias jbm='jb move'
 alias jbt='jb track'
 alias jl='jj log -r ..'
 alias jpush="jbm -B --from 'closest_bookmark(@-)' --to @ && jj git push"
+alias jf='jj git fetch'
 alias jpull='jj git fetch; jj pull'
 alias jst='jj st'
 alias jsp='jj split'
