@@ -196,3 +196,8 @@ if [ -f /proc/sys/fs/binfmt_misc/WSLInterop ]; then
     source ~/dotfiles/.zshrc_wsl
 fi
 
+# docker shortcuts
+alias dc='sudo docker compose'
+function de() {
+    sudo docker container $1 exec -it ${@:2}
+}
