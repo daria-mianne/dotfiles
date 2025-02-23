@@ -143,7 +143,7 @@ alias jrb='jj rebase'
 jconfu user.name "Daria Anderson"
 jconfu user.email "dariaander@icloud.com"
 jconfu revset-aliases."'closest_bookmark(to)'" "'heads(::to & bookmarks())'"
-jconfu aliases.pull '["bookmark", "move", "--from", "closest_bookmark(@-)", "--to", "@-"]'
+jconfu aliases.pull '["rebase", "-d", "trunk()"]'
 jconfu git.auto-local-bookmark true
 jconfu revsets.log "'all()'"
 
