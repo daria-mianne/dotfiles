@@ -198,6 +198,4 @@ fi
 
 # docker shortcuts
 alias dc='sudo docker compose'
-function de() {
-    sudo docker container $1 exec -it ${@:2}
-}
+alias de='sudo docker exec -it'
